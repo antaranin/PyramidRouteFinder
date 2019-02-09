@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyramidRouteFinderCons", "PyramidRouteFinderCons\PyramidRouteFinderCons.csproj", "{452209E3-BF00-4F1D-B4E0-4058B28DA593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyramidRouteFinderLib", "PyramidRouteFinderLib\PyramidRouteFinderLib.csproj", "{4BAF5D67-5FAB-4EA1-B9D6-86B27872D773}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyramidRouteFinderTest", "PyramidRouteFinderTest\PyramidRouteFinderTest.csproj", "{51B67BB6-4042-48BB-8299-6FF4FB5FAA71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{452209E3-BF00-4F1D-B4E0-4058B28DA593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452209E3-BF00-4F1D-B4E0-4058B28DA593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452209E3-BF00-4F1D-B4E0-4058B28DA593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452209E3-BF00-4F1D-B4E0-4058B28DA593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BAF5D67-5FAB-4EA1-B9D6-86B27872D773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BAF5D67-5FAB-4EA1-B9D6-86B27872D773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BAF5D67-5FAB-4EA1-B9D6-86B27872D773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BAF5D67-5FAB-4EA1-B9D6-86B27872D773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B67BB6-4042-48BB-8299-6FF4FB5FAA71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B67BB6-4042-48BB-8299-6FF4FB5FAA71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B67BB6-4042-48BB-8299-6FF4FB5FAA71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B67BB6-4042-48BB-8299-6FF4FB5FAA71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
