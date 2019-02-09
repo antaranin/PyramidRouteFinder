@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using PyramidRouteFinderLib;
@@ -51,7 +52,11 @@ namespace PyramidRouteFinderTest
             parser.ParseIntoPyramid(input);
 
             //Assert 
-            constructor.Verify(m => m.ConstructPyramidFromDataLines(expectedOutput), Times.Once);
+            constructor.Verify(m =>
+                    m.ConstructPyramidFromDataLines(
+                        It.Is<IList<IList<int>>>(l => VerifyListContentsSame(l, expectedOutput))),
+                Times.Once
+            );
             constructor.VerifyNoOtherCalls();
         }
 
@@ -60,11 +65,10 @@ namespace PyramidRouteFinderTest
         {
             //Arrange
             var input = new List<string> {"33 22 -2"};
-            var parsedInput = new List<IList<int>> {new List<int> {33, 22, -2}};
-            var result = new Pyramid<int>(75, new Pyramid<int>(100));
+            var expectedResult = new Option<Pyramid<int>>(new Pyramid<int>(75, new Pyramid<int>(100)));
             var constructor = new Mock<IPyramidConstructor<int>>();
-            constructor.Setup(m => m.ConstructPyramidFromDataLines(parsedInput))
-                       .Returns(new Option<Pyramid<int>>(result));
+            constructor.Setup(m => m.ConstructPyramidFromDataLines(It.IsAny<IList<IList<int>>>()))
+                       .Returns(expectedResult);
 
             var parser = new NumericalDataParser(constructor.Object);
 
@@ -72,7 +76,15 @@ namespace PyramidRouteFinderTest
             var actualResult = parser.ParseIntoPyramid(input);
 
             //Assert 
-            Assert.AreEqual(result, actualResult);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        private static bool VerifyListContentsSame<T>(ICollection<IList<T>> list1, ICollection<IList<T>> list2)
+        {
+            bool SubListContentSame(IList<T> l1, IList<T> l2) =>
+                l1.Count == l2.Count && l1.Zip(l2, (el1, el2) => Equals(el1, el2)).All(el => el);
+
+            return list1.Count == list2.Count && list1.Zip(list2, SubListContentSame).All(el => el);
         }
     }
 }

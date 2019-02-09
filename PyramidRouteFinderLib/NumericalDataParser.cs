@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using JetBrains.Annotations;
 using PyramidRouteFinderLib.Model;
 
@@ -15,12 +16,13 @@ namespace PyramidRouteFinderLib
 
         public Option<Pyramid<int>> ParseIntoPyramid(IEnumerable<string> data)
         {
-            return Option<Pyramid<int>>.None;
+            var formattedData = ExtractDataLines(data);
+            return _pyramidConstructor.ConstructPyramidFromDataLines(formattedData);
         }
 
         private IList<IList<int>> ExtractDataLines(IEnumerable<string> data)
         {
-            throw new System.NotImplementedException("Pyramid fail");
+            return data.Select(d => d.Split(" ").Select(int.Parse).ToList() as IList<int>).ToList();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 
 namespace PyramidRouteFinderLib.Model
@@ -39,6 +40,38 @@ namespace PyramidRouteFinderLib.Model
             Value = value;
             Left = Option<Pyramid<T>>.None;
             Right = Option<Pyramid<T>>.None;
+        }
+
+        protected bool Equals(Pyramid<T> other)
+        {
+            return EqualityComparer<T>.Default.Equals(Value, other.Value) && Left.Equals(other.Left) && Right.Equals(other.Right);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            if (ReferenceEquals(this, obj))
+                return true;
+            if (obj.GetType() != this.GetType())
+                return false;
+            return Equals((Pyramid<T>) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = EqualityComparer<T>.Default.GetHashCode(Value);
+                hashCode = (hashCode * 397) ^ Left.GetHashCode();
+                hashCode = (hashCode * 397) ^ Right.GetHashCode();
+                return hashCode;
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Value)}: {Value}, {nameof(Left)}: {Left}, {nameof(Right)}: {Right}";
         }
     }
 }
