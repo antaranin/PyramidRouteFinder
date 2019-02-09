@@ -7,7 +7,7 @@ namespace PyramidRouteFinderLib
     {
         public Option<Pyramid<T>> ConstructPyramidFromDataLines(IList<IList<T>> dataLines)
         {
-            throw new System.NotImplementedException();
+            return Option<Pyramid<T>>.None;
         }
     }
 }
