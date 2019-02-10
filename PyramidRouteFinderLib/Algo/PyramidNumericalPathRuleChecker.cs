@@ -1,12 +1,10 @@
-using PyramidRouteFinderLib.Model;
-
 namespace PyramidRouteFinderLib.Algo
 {
     internal class PyramidNumericalPathRuleChecker : IPyramidPathRuleChecker<int>
     {
-        public bool IsValidPath(int currentelement, int nextElement)
+        public bool IsValidPath(int currentElement, int nextElement)
         {
-            return false;
+            return (currentElement + nextElement) % 2 != 0;
         }
     }
 }

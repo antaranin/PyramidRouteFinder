@@ -14,6 +14,13 @@ namespace PyramidRouteFinderLib.Model
         [NotNull]
         public Option<Pyramid<T>> Right { get; }
 
+        public Pyramid([NotNull] Option<Pyramid<T>> left, T value, [NotNull] Option<Pyramid<T>> right)
+        {
+            Value = value;
+            Left = left;
+            Right = right;
+        }
+
         public Pyramid([NotNull] Pyramid<T> left, T value, [NotNull] Pyramid<T> right)
         {
             Value = value;
@@ -21,7 +28,7 @@ namespace PyramidRouteFinderLib.Model
             Right = new Option<Pyramid<T>>(right);
         }
 
-        public Pyramid([NotNull]Pyramid<T> left, T value)
+        public Pyramid([NotNull] Pyramid<T> left, T value)
         {
             Value = value;
             Left = new Option<Pyramid<T>>(left);
@@ -44,7 +51,8 @@ namespace PyramidRouteFinderLib.Model
 
         protected bool Equals(Pyramid<T> other)
         {
-            return EqualityComparer<T>.Default.Equals(Value, other.Value) && Left.Equals(other.Left) && Right.Equals(other.Right);
+            return EqualityComparer<T>.Default.Equals(Value, other.Value) && Left.Equals(other.Left) &&
+                   Right.Equals(other.Right);
         }
 
         public override bool Equals(object obj)

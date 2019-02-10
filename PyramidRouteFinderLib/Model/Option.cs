@@ -32,6 +32,11 @@ namespace PyramidRouteFinderLib.Model
             return _hasValue ? new Option<TR>(hasValueOp(_value)) : Option<TR>.None;
         }
 
+        public Option<TR> FlatMap<TR>(Func<T, Option<TR>> hasValueOp)
+        {
+            return _hasValue ? hasValueOp(_value) : Option<TR>.None;
+        }
+
         protected bool Equals(Option<T> other)
         {
             return EqualityComparer<T>.Default.Equals(_value, other._value) && _hasValue == other._hasValue;
