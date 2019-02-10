@@ -57,7 +57,7 @@ namespace PyramidRouteFinderTest
             var result = constructor.ConstructPyramidFromDataLines(input);
 
             //Assert 
-            Assert.AreSame(expectedResult, result);
+            Assert.AreEqual(expectedResult, result);
         }
 
         [Test]

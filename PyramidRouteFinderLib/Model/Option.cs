@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
@@ -19,6 +20,16 @@ namespace PyramidRouteFinderLib.Model
         private Option()
         {
             _hasValue = false;
+        }
+
+        public TR Fold<TR>([NotNull] Func<T, TR> hasValueOp, [NotNull] Func<TR> noValueOp)
+        {
+            return _hasValue ? hasValueOp(_value) : noValueOp();
+        }
+
+        public Option<TR> Map<TR>(Func<T, TR> hasValueOp)
+        {
+            return _hasValue ? new Option<TR>(hasValueOp(_value)) : Option<TR>.None;
         }
 
         protected bool Equals(Option<T> other)
