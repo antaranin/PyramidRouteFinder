@@ -4,6 +4,10 @@ using System.Linq;
 using JetBrains.Annotations;
 using PyramidRouteFinderLib.Algo;
 using PyramidRouteFinderLib.Model;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("PyramidRouteFinderTest")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace PyramidRouteFinderLib
 {
@@ -45,10 +49,10 @@ namespace PyramidRouteFinderLib
 
             var stringData = _fileDataExtractor.ExtractLines(filePath);
             var resultingPyramid = _numericalDataParser.ParseIntoPyramid(stringData);
-            
+
             return resultingPyramid.Map(pyramid => _pyramidRuleApplier.TransformPyramid(pyramid))
-                            .Map(transformedPyramid => _longestRouteFinder.FindLongestRoute(transformedPyramid))
-                            .Fold(r => r, () => new Route<int>(new List<int>()));
+                                   .Map(transformedPyramid => _longestRouteFinder.FindLongestRoute(transformedPyramid))
+                                   .Fold(r => r, () => new Route<int>(new List<int>()));
         }
     }
 }

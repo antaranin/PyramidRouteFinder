@@ -9,20 +9,6 @@ The project was created as a coding exercise in writing maintainable C# algorith
 I recommend using JetBrains Rider in order to fully take advantage 
 of type annotations in the project, however can also be simply run with Visual Studio.
 
-In case the testing project doesn't compile, please add to following lines to 
-PyramidRouteFinderLib.AssemblyInfo.cs
-```C#
-using System.Runtime.CompilerServices;
-
-[assembly:InternalsVisibleTo("PyramidRouteFinderTest")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] 
-```
-
-
-
-
-
-
 ## Usage
 
 ```C#

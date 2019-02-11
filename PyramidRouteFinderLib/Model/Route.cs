@@ -28,7 +28,7 @@ namespace PyramidRouteFinderLib.Model
         }
         
         [NotNull]
-        private static string FormatRoute<T>(Route<T> route)
+        private static string FormatRoute(Route<T> route)
         {
             var s = route.Steps.Select(step => $" => {step}")
                          .Aggregate("", (el, acc) => el + acc);
