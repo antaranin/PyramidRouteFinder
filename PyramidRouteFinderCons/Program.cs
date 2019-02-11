@@ -13,6 +13,7 @@ namespace PyramidRouteFinderCons
             var finder = new RouteFinder();
             var route = finder.FindNumericalRouteFromFile(path);
             Console.WriteLine(route);
+            Console.WriteLine($"Sum: {route.Steps.Sum()}");
         }
 
     }
