@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 
 namespace PyramidRouteFinderLib.Model
 {
-    //Solve also empty Pyramid 
     internal class Pyramid<T>
     {
         public T Value { get; }

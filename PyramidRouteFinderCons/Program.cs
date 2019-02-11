@@ -2,7 +2,6 @@
 using System.Linq;
 using JetBrains.Annotations;
 using PyramidRouteFinderLib;
-using PyramidRouteFinderLib.Model;
 
 namespace PyramidRouteFinderCons
 {
@@ -10,19 +9,11 @@ namespace PyramidRouteFinderCons
     {
         static void Main(string[] args)
         {
-//          Console.WriteLine("Insert data file path");
-//          var path = Console.ReadLine();
-            const string path = "../data0.txt";
+            const string path = "../data1.txt";
             var finder = new RouteFinder();
             var route = finder.FindNumericalRouteFromFile(path);
-            Console.WriteLine(FormatRoute(route));
+            Console.WriteLine(route);
         }
 
-        [NotNull]
-        private static string FormatRoute<T>(Route<T> route)
-        {
-            return route.Steps.Select(step => $" => {step}")
-                        .Aggregate("start", (el, acc) => el + acc);
-        }
     }
 }

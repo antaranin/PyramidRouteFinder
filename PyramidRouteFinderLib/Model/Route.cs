@@ -21,6 +21,19 @@ namespace PyramidRouteFinderLib.Model
             var newSteps = Steps.Prepend(step).ToList();
             return new Route<T>(newSteps);
         }
+
+        public override string ToString()
+        {
+            return $"Route: {FormatRoute(this)}";
+        }
+        
+        [NotNull]
+        private static string FormatRoute<T>(Route<T> route)
+        {
+            var s = route.Steps.Select(step => $" => {step}")
+                         .Aggregate("", (el, acc) => el + acc);
+            return s.Length >= 4 ? s.Substring(4) : s;
+        }
     }
 
     internal class NumericRoute : Route<int>

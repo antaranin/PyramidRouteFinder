@@ -8,20 +8,16 @@ namespace PyramidRouteFinderLib.Algo
     internal class LongestNumericalRouteFinder : ILongestRouteFinder<int>
     {
         private IDictionary<Pyramid<int>, NumericRoute> _memorizer;
-        private int counter = 0;
 
         public Route<int> FindLongestRoute(Pyramid<int> pyramid)
         {
             _memorizer = new Dictionary<Pyramid<int>, NumericRoute>();
-            counter = 0;
             var res =  FindLongestRouteWithMem(pyramid);
-            Console.WriteLine("Count => " + counter);
             return res;
         }
 
         private NumericRoute FindLongestRouteWithMem(Pyramid<int> pyramid)
         {
-            counter++;
             if (_memorizer.ContainsKey(pyramid))
                 return _memorizer[pyramid];
 
