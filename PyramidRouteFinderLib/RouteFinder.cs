@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using PyramidRouteFinderLib.Algo;
@@ -39,7 +40,15 @@ namespace PyramidRouteFinderLib
         [NotNull]
         public Route<int> FindNumericalRouteFromFile([NotNull] string filePath)
         {
-            return null;
+            if (filePath == null)
+                throw new ArgumentNullException($"{nameof(filePath)} cannot be null");
+
+            var stringData = _fileDataExtractor.ExtractLines(filePath);
+            var resultingPyramid = _numericalDataParser.ParseIntoPyramid(stringData);
+            
+            return resultingPyramid.Map(pyramid => _pyramidRuleApplier.TransformPyramid(pyramid))
+                            .Map(transformedPyramid => _longestRouteFinder.FindLongestRoute(transformedPyramid))
+                            .Fold(r => r, () => new Route<int>(new List<int>()));
         }
     }
 }
