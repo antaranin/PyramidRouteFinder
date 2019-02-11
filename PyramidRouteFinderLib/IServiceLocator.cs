@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
+
 namespace PyramidRouteFinderLib
 {
     internal interface IServiceLocator
     {
-        T Get<T>();
+        [NotNull] T Get<T>();
     }
 }

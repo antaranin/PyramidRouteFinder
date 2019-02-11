@@ -5,7 +5,7 @@ namespace PyramidRouteFinderLib
 {
     internal interface IFileDataExtractor
     {
-        [NotNull]
+        [NotNull, ItemNotNull]
         IEnumerable<string> ExtractLines([NotNull] string filePath);
     }
 }
