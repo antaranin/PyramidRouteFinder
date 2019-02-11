@@ -66,17 +66,6 @@ namespace PyramidRouteFinderLib.Model
             return Equals((Pyramid<T>) obj);
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = EqualityComparer<T>.Default.GetHashCode(Value);
-                hashCode = (hashCode * 397) ^ Left.GetHashCode();
-                hashCode = (hashCode * 397) ^ Right.GetHashCode();
-                return hashCode;
-            }
-        }
-
         public override string ToString()
         {
             return $"{nameof(Value)}: {Value}, {nameof(Left)}: {Left}, {nameof(Right)}: {Right}";

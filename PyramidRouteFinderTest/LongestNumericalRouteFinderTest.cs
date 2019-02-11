@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using PyramidRouteFinderLib.Algo;
 using PyramidRouteFinderLib.Model;
@@ -174,11 +176,10 @@ namespace PyramidRouteFinderTest
             var p4_1 = new Pyramid<int>(p5_1, 40, p5_2);
             var p4_2 = new Pyramid<int>(p5_2, 55, p5_3);
             var p4_4 = new Pyramid<int>(p5_4, 99, p5_5);
-            var p3_1 = new Pyramid<int>(p4_1, 07, p4_1);
-            var p3_2 = new Pyramid<int>(p4_2, 12);
+            var p3_1 = new Pyramid<int>(p4_1, 07, p4_2);
             var p3_3 = new Pyramid<int>(99, p4_4);
-            var p2_1 = new Pyramid<int>(p3_1, 30, p3_2);
-            var p2_2 = new Pyramid<int>(p3_2, 02, p3_3);
+            var p2_1 = new Pyramid<int>(p3_1, 30);
+            var p2_2 = new Pyramid<int>(02, p3_3);
             var top = new Pyramid<int>(p2_1, 07, p2_2);
 
             var finder = new LongestNumericalRouteFinder();
@@ -189,6 +190,49 @@ namespace PyramidRouteFinderTest
             //Assert 
             Assert.NotNull(result);
             TestHelper.AssertListContentSame(expectedRes, result.Steps);
+        }
+
+        [Test]
+        public void LargePyramidPassed_FindRoute_ARouteReturned()
+        {
+            //Arrange
+            var previousRow = Option<List<Pyramid<int>>>.None;
+            const int rowCount = 500;
+            for (var i = rowCount; i > 0; i--)
+            {
+                var currentRow = i;
+                previousRow = previousRow.Fold(r =>
+                    {
+                        var row = new List<Pyramid<int>>();
+                        for (var j = 0; j < currentRow; j++)
+                        {
+                            row.Add(new Pyramid<int>(r[j], currentRow, r[j + 1]));
+                        }
+
+                        return new Option<List<Pyramid<int>>>(row);
+                    },
+                    () =>
+                    {
+                        var row = new List<Pyramid<int>>();
+                        for (var j = 0; j < currentRow; j++)
+                        {
+                            row.Add(new Pyramid<int>(currentRow));
+                        }
+
+                        return new Option<List<Pyramid<int>>>(row);
+                    });
+            }
+
+            var pyramid = previousRow.Fold(r => r.Single(), () => throw new InvalidOperationException());
+            var finder = new LongestNumericalRouteFinder();
+
+            var expectedResult = Enumerable.Range(1, rowCount).ToList();
+
+            //Act
+            var result = finder.FindLongestRoute(pyramid);
+
+            //Assert 
+            TestHelper.AssertListContentSame(expectedResult, result.Steps);
         }
     }
 }
